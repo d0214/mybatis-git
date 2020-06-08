@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- Mybatis核心配置文件 -->
+<configuration>
+
+    <!-- 引入外部配置文件 ps:在XML中所有标签都可以规定顺序 -->
+    <properties resource="config/db.properties">
+        <!-- 如果两个文件有同一个字段，优先使用外部配置文件字段 -->
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </properties>
+    
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <!-- 类型别名 -->
+    <!-- 可以给实体类起别名,用来减少类完全限定名的冗余 -->
+    <typeAliases>
+        <typeAlias type="com.aaa.dc.entity.student" alias="student"/>
+    </typeAliases>
+
+    <environments default="development">
+
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+    <mappers>
+        <mapper class="com.aaa.dc.mapper.StudentMapper"/>
+        <!-- 只有接口配合注解时使用class -->
+    </mappers>
+</configuration>
